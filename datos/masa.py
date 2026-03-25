@@ -3,13 +3,22 @@ componentes = ["motor izquierdo", "motor derecho", "fuselaje", "ala izquierda", 
 masas = [1200, 1200, 5000, 800, 800, 600]
 posiciones_x = [2, 2, 0, -2, 2, -6]
 
+
+
+# for c, m in zip(componentes, masas):
+#     print(f"El {c} pesa {m} kg")
+
 # Cálculo del centro de masa en eje X sin list comprehensions
 masa_total = 0
 momento_total = 0
 
+# for m, p in zip(masas, posiciones_x):
+#      masa_total += m
+#      momento_total += m * p
+
 for i in range(len(masas)):
-    masa_total += masas[i]
-    momento_total += masas[i] * posiciones_x[i]
+     masa_total += masas[i]
+     momento_total += masas[i] * posiciones_x[i]
 
 centro_masa_x = momento_total / masa_total
 
