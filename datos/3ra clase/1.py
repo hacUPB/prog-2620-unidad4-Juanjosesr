@@ -1,71 +1,54 @@
-# Representando una flota de aeronaves con tuplas
-# (modelo, envergadura (m), longitud (m), mtow (kg), velocidad_max (km/h))
-fleet_data = [
-    ("Airbus A320", 35.80, 37.57, 78000, 871),
-    ("Boeing 737-800", 35.79, 39.47, 79010, 853),
-    ("Embraer E190", 28.72, 36.24, 51800, 871),
-    ("Bombardier CRJ-900", 24.85, 36.40, 38330, 870)
+def comparar_rendimiento(aeronaves):
+    """
+    Analiza el rendimiento de diferentes aeronaves basado en sus características.
+
+    Args:
+        aeronaves: Lista de tuplas con formato:
+            (nombre, consumo_combustible, velocidad_crucero, capacidad_carga)
+            donde consumo está en L/km, velocidad en km/h y carga en kg
+
+    Returns:
+        Tupla con (aeronave_más_eficiente, aeronave_más_rápida, aeronave_mayor_capacidad)
+    """
+    # Inicializamos los récords
+    mejor_eficiencia_valor = float('inf')  # buscamos el MENOR consumo
+    mejor_eficiencia = None
+    
+    mayor_velocidad_valor = 0              # buscamos el MAYOR
+    mas_rapida = None
+    
+    mayor_capacidad_valor = 0             # buscamos el MAYOR
+    mayor_capacidad = None
+
+    for avion in aeronaves:
+        
+        # Más eficiente → índice [1], el menor consumo
+        if avion[1] < mejor_eficiencia_valor:
+            mejor_eficiencia_valor = avion[1]
+            mejor_eficiencia = avion
+
+        # Más rápida → índice [2], la mayor velocidad
+        if avion[2] > mayor_velocidad_valor:
+            mayor_velocidad_valor = avion[2]
+            mas_rapida = avion
+
+        # Mayor capacidad → índice [3], la mayor carga
+        if avion[3] > mayor_capacidad_valor:
+            mayor_capacidad_valor = avion[3]
+            mayor_capacidad = avion
+
+    return (mejor_eficiencia, mas_rapida, mayor_capacidad)
+
+# Datos de prueba (nombre, consumo L/km, velocidad km/h, carga kg)
+aviones = [
+    ("Boeing 747-8F", 12.5, 908, 134200),
+    ("Airbus A330-200F", 8.0, 871, 70000),
+    ("Boeing 777F", 7.2, 896, 103000),
+    ("Antonov An-124", 15.6, 800, 150000)
 ]
 
-# Encontrar el avión con mayor envergadura (paso a paso)
-print("=== Buscando el avión con mayor envergadura ===")
-
-# Inicializamos variables para el seguimiento
-avion_mayor_envergadura = None
-mayor_envergadura_valor = 0
-
-# Recorremos cada avión en la flota
-for avion in fleet_data:
-    # Extraemos los datos del avión actual
-    modelo = avion[0]
-    envergadura = avion[1]
-    longitud = avion[2]
-    mtow = avion[3]
-    velocidad_max = avion[4]
-    
-    print(f"Revisando: {modelo} - Envergadura: {envergadura} m")
-    
-    # Comparamos si esta envergadura es mayor que la que teníamos guardada
-    if envergadura > mayor_envergadura_valor:
-        # Si es mayor, actualizamos nuestros valores
-        mayor_envergadura_valor = envergadura
-        avion_mayor_envergadura = avion
-        print(f"  → Nuevo récord encontrado: {modelo}")
-    else:
-        print(f"  → No supera el récord actual")
-
-# Mostramos el resultado
-print(f"\nResultado: Avión con mayor envergadura: {avion_mayor_envergadura[0]} ({avion_mayor_envergadura[1]} m)")
-
-print("\n" + "="*50)
-
-# Calcular velocidad promedio de la flota (paso a paso)
-print("=== Calculando velocidad promedio de la flota ===")
-
-# Inicializamos variables para el cálculo
-suma_velocidades = 0
-contador_aviones = 0
-
-# Recorremos cada avión para sumar las velocidades
-for avion in fleet_data:
-    # Extraemos el modelo y la velocidad del avión actual
-    modelo = avion[0]
-    velocidad = avion[4]
-    
-    print(f"Procesando: {modelo} - Velocidad: {velocidad} km/h")
-    
-    # Sumamos la velocidad al total
-    suma_velocidades = suma_velocidades + velocidad
-    contador_aviones = contador_aviones + 1
-    
-    print(f"  → Suma acumulada: {suma_velocidades} km/h")
-    print(f"  → Aviones procesados: {contador_aviones}")
-
-# Calculamos el promedio
-velocidad_promedio = suma_velocidades / contador_aviones
-
-# Mostramos el resultado
-print(f"\nCálculo final:")
-print(f"Suma total de velocidades: {suma_velocidades} km/h")
-print(f"Número de aviones: {contador_aviones}")
-print(f"Velocidad promedio de la flota: {velocidad_promedio:.2f} km/h")
+# Probando la función
+mejor_eficiencia, mas_rapido, mayor_carga = comparar_rendimiento(aviones)
+print(f"Más eficiente: {mejor_eficiencia}")
+print(f"Más rápido: {mas_rapido}")
+print(f"Mayor capacidad: {mayor_carga}")
