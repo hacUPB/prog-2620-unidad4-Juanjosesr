@@ -13,10 +13,10 @@ NUM_AERONAVES = 3  # Mínimo requerido por el enunciado
 
 i = 0
 while i < NUM_AERONAVES:
-    print(f"\n  Aeronave {i + 1} de {NUM_AERONAVES}")
+    print(f"Aeronave {i + 1} de {NUM_AERONAVES}")
 
-    matricula = input("Matrícula (ej. HK-4532): ")
-    modelo    = input("Modelo   (ej. A320)    : ")
+    matricula = input("Matrícula: ")
+    modelo    = input("Modelo: ")
 
     # Validación básica: horas deben ser un número
     horas_validas = False
@@ -26,7 +26,7 @@ while i < NUM_AERONAVES:
             horas_vuelo = float(horas_str)
             horas_validas = True
         else:
-            print("  ⚠ Ingresa un número válido.")
+            print("Ingresa un número válido.")
 
     # Cada aeronave es un diccionario con su información básica
     # y una lista vacía donde se añadirán sus componentes.
@@ -38,33 +38,33 @@ while i < NUM_AERONAVES:
     }
 
     # PASO 2: Registro de componentes para esta aeronave
-    print(f"\n  Registro de componentes para {matricula}")
-    print("  (Escribe 'listo' como nombre para terminar)")
+    print(f"Registro de componentes para {matricula}")
+    print("(Escribe 'listo' como nombre para terminar)")
 
     while True:
-        nombre_comp = input("\n  Nombre del componente: ")
+        nombre_comp = input("Nombre del componente: ")
         if nombre_comp.lower() == "listo":
             break
 
         # Validación horas de uso
         uso_valido = False
         while not uso_valido:
-            uso_str = input("  Horas de uso actuales : ")
+            uso_str = input("Horas de uso actuales : ")
             if uso_str.replace(".", "").isdigit():
                 horas_uso = float(uso_str)
                 uso_valido = True
             else:
-                print("  ⚠ Ingresa un número válido.")
+                print("Ingresa un número válido.")
 
         # Validación límite de horas
         limite_valido = False
         while not limite_valido:
-            limite_str = input("  Límite de horas antes de mantenimiento: ")
+            limite_str = input("Límite de horas antes de mantenimiento: ")
             if limite_str.replace(".", "").isdigit():
                 limite = float(limite_str)
                 limite_valido = True
             else:
-                print("  ⚠ Ingresa un número válido.")
+                print("Ingresa un número válido.")
 
         # Cada componente es un diccionario dentro de la lista
         # "componentes" de la aeronave correspondiente.
@@ -75,7 +75,7 @@ while i < NUM_AERONAVES:
         }
 
         aeronave["componentes"].append(componente)
-        print(f"  ✔ Componente '{nombre_comp}' registrado.")
+        print(f"Componente '{nombre_comp}' registrado.")
 
     # Añadir la aeronave completa a la flota
     flota.append(aeronave)
@@ -83,10 +83,8 @@ while i < NUM_AERONAVES:
 
 # PASO 3: Reporte de componentes que requieren
 #         mantenimiento (horas_uso >= límite)
-print("\n")
-print("=" * 50)
-print("        REPORTE DE MANTENIMIENTO INMEDIATO")
-print("=" * 50)
+
+print("REPORTE DE MANTENIMIENTO INMEDIATO")
 
 hay_alertas = False  # bandera para saber si existe al menos una alerta
 
@@ -95,16 +93,14 @@ for aeronave in flota:
         if componente["horas_uso"] >= componente["limite"]:
             if not hay_alertas:
                 hay_alertas = True
-            print(f"\n  ⚠ ALERTA - Aeronave : {aeronave['matricula']} ({aeronave['modelo']})")
-            print(f"    Componente         : {componente['nombre']}")
-            print(f"    Horas de uso       : {componente['horas_uso']}")
-            print(f"    Límite permitido   : {componente['limite']}")
+            print(f"ALERTA - Aeronave : {aeronave['matricula']} ({aeronave['modelo']})")
+            print(f"Componente         : {componente['nombre']}")
+            print(f"Horas de uso       : {componente['horas_uso']}")
+            print(f"Límite permitido   : {componente['limite']}")
             exceso = componente["horas_uso"] - componente["limite"]
-            print(f"    Exceso             : {exceso:.1f} h")
+            print(f"Exceso             : {exceso:.1f} h")
 
 if not hay_alertas:
-    print("\n  ✔ Todos los componentes están dentro de sus límites.")
+    print("Todos los componentes están dentro de sus límites.")
 
-print("\n" + "=" * 50)
 print("  Aeronaves registradas en el sistema:", len(flota))
-print("=" * 50)
