@@ -39,7 +39,7 @@ while i < NUM_AERONAVES:
         "componentes": []          # lista de diccionarios de componentes
     }
 
-# PASO 2: Registro de componentes para esta aeronave
+    # PASO 2: Registro de componentes para esta aeronave
     print(f"\n  Registro de componentes para {matricula}")
     print("  (Escribe 'listo' como nombre para terminar)")
 
