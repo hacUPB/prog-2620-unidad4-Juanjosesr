@@ -7,9 +7,7 @@
 # uno por cada aeronave ingresada por el usuario.
 flota = []
 
-print("=" * 50)
 print("  SISTEMA DE MANTENIMIENTO DE FLOTA AERONÁUTICA")
-print("=" * 50)
 
 NUM_AERONAVES = 3  # Mínimo requerido por el enunciado
 
